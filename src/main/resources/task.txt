@@ -1,0 +1,19 @@
+
+
+Stwórz obiektowy program do zarz¹dzania firm¹. Program powinien posiadaæ nastêpuj¹ce modu³y:
+
+- modu³ ksiêgowy:
+* dodawanie kontrahentów
+* Powinien pozwalaæ na wystawianie faktur
+* Nie powinien umo¿liwiæ sprzeda¿y towarów, w wiêkszej iloœci ni¿ jest na magazynie.
+* mo¿liwoœæ zapisywania, odczytywania, edytowania oraz usuwania faktur.
+* generowanie podsumowania danego miesi¹ca, pokazywania ile mamy do zap³aty podatku dochodowego.
+* powiadamiaæ o niezap³aconych fakturach.
+
+- modu³ kadrowy:
+* dodawania, usuwanie, edytowanie danego pracownika.
+* nieco po³¹czony z modu³em ksiêgowym powinien raz w miesi¹cu doliczyæ koszt w
+postaci pensji danego pracownika.
+* oblicza pensjê pracownika.
+
+
