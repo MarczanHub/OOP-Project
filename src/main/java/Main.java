@@ -170,7 +170,7 @@ public class Main {
         if (decision.equals("confirm")){
             System.out.println();
             contractor.getBio();
-        } else if (decision.equals("back")){
+        } else if (decision.equals("decline")){
             bookkeepingModule();
         } else {
             System.out.println("Niepoprawna komenda, zostajesz przeniesiony do panelu u¿ytkownika.");
