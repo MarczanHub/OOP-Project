@@ -1,4 +1,5 @@
 import bookkeeping.contractor.Contractor;
+import bookkeeping.taxes.MonthSummary;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +18,6 @@ public class Main {
         stockStatus.put("Strop ceramiczny \tiloœæ: ", 1000);
         stockStatus.put("Tynk silikonowy \tiloœæ: ", 2000);
         stockStatus.put("Farba akrylowa \tiloœæ: ", 1500);
-//        MonthSummary summary = new MonthSummary();
-//        System.out.println(summary.getTaxToPay());
 
         while (exit) {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t* Program modu³owy do zarz¹dzania firm¹ *\n");
@@ -138,6 +137,8 @@ public class Main {
     }
 
     private static void showMonthSummary() {
+        MonthSummary summary = new MonthSummary();
+        System.out.println(summary.getTaxToPay());
     }
 
     private static void showAllInvoices() {
@@ -161,7 +162,20 @@ public class Main {
     }
 
     private static void addContractor() {
+        System.out.println("Wpisz kolejno nastêpuj¹ce dane: ID kontrahenta, Nazwê Firmy, NIP");
+        Contractor contractor = new Contractor(sc.nextLong(), sc.next(), sc.next());
 
+        System.out.println("\nW celu zatwierdzenia wpisanych danych wpisz 'confirm' lub wprowadŸ 'back', aby powróciæ do modu³u ksiêgowego.");
+        String decision = sc.next();
+        if (decision.equals("confirm")){
+            System.out.println();
+            contractor.getBio();
+        } else if (decision.equals("back")){
+            bookkeepingModule();
+        } else {
+            System.out.println("Niepoprawna komenda, zostajesz przeniesiony do panelu u¿ytkownika.");
+            isLoggedIn();
+        }
 
     }
 
@@ -180,6 +194,7 @@ public class Main {
                 case "3" -> editEmployeeData();
                 case "4" -> calculateSalary();
                 case "5" -> isLoggedIn();
+                default -> System.out.println("Niepoprawna komenda");
             }
         }
     }
