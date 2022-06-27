@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContractorOperations implements CrudOperations<Contractor> {
 
-    public static final String CONTRACTOR_CSV = "src/main/java/resources/contractor.csv";
+    public static final String CONTRACTOR_CSV = "src/main/resources/contractor.csv";
 
     @Override
     public void save(Contractor type) {
