@@ -168,10 +168,23 @@ public class Main {
     }
 
     private static void payInvoice() {
-
+        boolean isPaid = false;
+        if (!isPaid){
+            System.out.println("Invoice has been already paid");
+        } else {
+            System.out.println("Type 'pay' to pay the invoice or type 'decline' to go back to the user panel");
+            String decision = sc.next();
+            if (decision.equalsIgnoreCase("pay")){
+                System.out.println("The invoice has been paid");
+                isPaid = true;
+            } else if (decision.equalsIgnoreCase("decline")){
+                System.out.println("You will be taken to user's panel");
+                isLoggedIn();
+            }
+        }
     }
 
-    private static void createInvoice() {
+    public static void createInvoice() {
         System.out.println("Enter the following information in sequence: Invoice ID, Payment Way (CASH/TRANSFER), Payment Currency (USD/EUR/PLN), Amount, Contractor ID, Is Paid (true/false)");
         Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong(), sc.nextBoolean());
 

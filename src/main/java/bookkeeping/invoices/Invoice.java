@@ -7,7 +7,7 @@ public class Invoice {
     private PaymentCurrency currency;
     private double amount;
     private long contractorId;
-    private boolean isPaid;
+    public boolean isPaid;
 
     public Invoice(long invoiceId, PaymentWay paymentWay, PaymentCurrency currency, double amount, long contractorId, boolean isPaid) {
         this.invoiceId = invoiceId;
