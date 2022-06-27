@@ -231,13 +231,14 @@ public class Main {
 
     private static void addEmployee() {
         System.out.println("Enter the following information in sequence: Name, Surname, Pesel, Salary");
-        Employee newEmployee = new Employee(sc.next(), sc.next(), sc.next(), sc.nextDouble());
+        sc.nextLine();
+        Employee newEmployee = new Employee(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextDouble());
 
+        System.out.println("\nTo confirm your entries type 'confirm' or type 'back', to return to the staff module.");
         String decision = sc.next();
         if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
-            new EmployeeOperations().save(newEmployee);
-            newEmployee.toString();
+            new EmployeeOperations().save(newEmployee);;
         } else if (decision.equalsIgnoreCase("decline")) {
             staffModule();
         } else {
