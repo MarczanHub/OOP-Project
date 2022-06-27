@@ -44,4 +44,13 @@ public class Invoice {
     public long getContractorId() {
         return contractorId;
     }
+
+    public void printInvoiceData() {
+        System.out.println("Invoice ID: " + invoiceId);
+        System.out.println("Payment way: " + paymentWay);
+        System.out.println("Payment currency: " + currency);
+        System.out.println("Amount: " + amount);
+        System.out.println("Contractor ID: " + contractorId);
+
+    }
 }
