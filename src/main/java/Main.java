@@ -253,6 +253,9 @@ public class Main {
     }
 
     private static void deleteEmployee() {
+        System.out.println("Enter employee pesel number");
+        long pesel = sc.nextLong();
+        new EmployeeOperations().deleteById(pesel);
 
     }
 
