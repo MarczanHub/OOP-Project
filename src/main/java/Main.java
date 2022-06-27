@@ -1,5 +1,9 @@
 import bookkeeping.contractor.Contractor;
 import bookkeeping.contractor.ContractorOperations;
+import bookkeeping.invoices.Invoice;
+import bookkeeping.invoices.InvoicesOperations;
+import bookkeeping.invoices.PaymentCurrency;
+import bookkeeping.invoices.PaymentWay;
 import bookkeeping.taxes.MonthSummary;
 
 import java.util.HashMap;
@@ -112,11 +116,11 @@ public class Main {
 
     private static void bookkeepingModule() {
 
-        while (isLogged){
+        while (isLogged) {
             System.out.println("\n1. Dodaj kontrahentów\n" +
                     "2. Wystaw fakturê\n" +
                     "3. Op³aæ fakturê\n" +
-                    "4. Usuñ fakturê\n"+
+                    "4. Usuñ fakturê\n" +
                     "5. Edytuj wprowadzon¹ fakturê\n" +
                     "6. Poka¿ wprowadzone faktury\n" +
                     "7. Poka¿ podsumowanie miesi¹ca + podatek dochodowy\n" +
@@ -143,23 +147,38 @@ public class Main {
     }
 
     private static void showAllInvoices() {
-        
+
     }
 
     private static void editInvoice() {
-        
+
     }
 
     private static void deleteInvoice() {
-        
+
     }
 
     private static void payInvoice() {
-        
+
     }
 
     private static void createInvoice() {
-        
+        System.out.println("Wpisz kolejno nastêpuj¹ce dane: ID Faktury, Sposób transakcji (CASH/TRANSFER), Waluta (USD/EUR/PLN), Kwota, ID Kontrahenta");
+        Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong());
+
+        System.out.println("\nW celu zatwierdzenia wpisanych danych wpisz 'confirm' lub wprowadŸ 'back', aby powróciæ do modu³u ksiêgowego.");
+        String decision = sc.next();
+        if (decision.equalsIgnoreCase("confirm")) {
+            System.out.println();
+            new InvoicesOperations().save(invoice);
+            invoice.printInvoiceData();
+        } else if (decision.equalsIgnoreCase("decline")) {
+            bookkeepingModule();
+        } else {
+            System.out.println("Niepoprawna komenda, zostajesz przeniesiony do panelu u¿ytkownika.");
+            isLoggedIn();
+        }
+
     }
 
     private static void addContractor() {
@@ -168,11 +187,11 @@ public class Main {
 
         System.out.println("\nW celu zatwierdzenia wpisanych danych wpisz 'confirm' lub wprowadŸ 'back', aby powróciæ do modu³u ksiêgowego.");
         String decision = sc.next();
-        if (decision.equals("confirm")){
+        if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
             new ContractorOperations().save(contractor);
             contractor.getBio();
-        } else if (decision.equals("decline")){
+        } else if (decision.equalsIgnoreCase("decline")) {
             bookkeepingModule();
         } else {
             System.out.println("Niepoprawna komenda, zostajesz przeniesiony do panelu u¿ytkownika.");
@@ -184,7 +203,7 @@ public class Main {
     private static void staffModule() {
 
         while (isLogged) {
-            System.out.println("\n1. Dodaj pracownika\n"+
+            System.out.println("\n1. Dodaj pracownika\n" +
                     "2. Usuñ pracownika\n" +
                     "3. Edytuj dane istniej¹cego pracownika\n" +
                     "4. Oblicz pensjê pracownika\n" +
