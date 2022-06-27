@@ -7,13 +7,15 @@ public class Invoice {
     private PaymentCurrency currency;
     private double amount;
     private long contractorId;
+    private boolean isPaid;
 
-    public Invoice(long invoiceId, PaymentWay paymentWay, PaymentCurrency currency, double amount, long contractorId) {
+    public Invoice(long invoiceId, PaymentWay paymentWay, PaymentCurrency currency, double amount, long contractorId, boolean isPaid) {
         this.invoiceId = invoiceId;
         this.paymentWay = paymentWay;
         this.currency = currency;
         this.amount = amount;
         this.contractorId = contractorId;
+        this.isPaid = isPaid;
     }
 
     public Invoice(String line) {
@@ -23,6 +25,7 @@ public class Invoice {
         this.currency = PaymentCurrency.valueOf(split[2]);
         this.amount = Double.parseDouble(split[3]);
         this.contractorId = Long.parseLong(split[4]);
+        this.isPaid = Boolean.parseBoolean(split[5]);
     }
 
     public long getInvoiceId() {
