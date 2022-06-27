@@ -31,7 +31,7 @@ public class Contractor {
         return nip;
     }
 
-    public void getBio() {
+    public void getContractorData() {
         System.out.println("Name: " + name);
         System.out.println("Contractor ID: " + contractorId);
         System.out.println("NIP: " + nip);

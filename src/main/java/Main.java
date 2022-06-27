@@ -5,6 +5,8 @@ import bookkeeping.invoices.InvoicesOperations;
 import bookkeeping.invoices.PaymentCurrency;
 import bookkeeping.invoices.PaymentWay;
 import bookkeeping.taxes.MonthSummary;
+import staff.Employee;
+import staff.EmployeeOperations;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -147,14 +149,21 @@ public class Main {
     }
 
     private static void showAllInvoices() {
-
+        System.out.println(new InvoicesOperations().findAll());
+        //idk co dalej
     }
 
     private static void editInvoice() {
-
     }
 
     private static void deleteInvoice() {
+//        System.out.println("Please enter Invoice ID to delete invoice:");
+//            new InvoicesOperations().deleteById(sc.nextLong());
+//        if (sc.next){
+//            System.out.println("The invoice has been deleted");
+//        } else {
+//            System.out.println("Given invoice ID does not exist");
+//        }
 
     }
 
@@ -190,7 +199,7 @@ public class Main {
         if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
             new ContractorOperations().save(contractor);
-            contractor.getBio();
+            contractor.getContractorData();
         } else if (decision.equalsIgnoreCase("decline")) {
             bookkeepingModule();
         } else {
@@ -221,7 +230,20 @@ public class Main {
     }
 
     private static void addEmployee() {
+        System.out.println("Enter the following information in sequence: Name, Surname, Pesel, Salary");
+        Employee newEmployee = new Employee(sc.next(), sc.next(), sc.next(), sc.nextDouble());
 
+        String decision = sc.next();
+        if (decision.equalsIgnoreCase("confirm")) {
+            System.out.println();
+            new EmployeeOperations().save(newEmployee);
+            newEmployee.toString();
+        } else if (decision.equalsIgnoreCase("decline")) {
+            staffModule();
+        } else {
+            System.out.println("Invalid command,  you will be taken to the user panel.");
+            isLoggedIn();
+        }
     }
 
     private static void deleteEmployee() {

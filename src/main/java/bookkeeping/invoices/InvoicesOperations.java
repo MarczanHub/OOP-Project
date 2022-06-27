@@ -18,7 +18,7 @@ public class InvoicesOperations implements CrudOperations<Invoice> {
     public void save(Invoice i) {
         ContractorOperations operations = new ContractorOperations();
         if (operations.findById(i.getContractorId()) == null) {
-            System.out.println("Taki kontrahent nie istnieje");
+            System.out.println("Given contractor does not exist.");
             return;
         }
         try (FileWriter fileWriter = new FileWriter(INVOICE_CSV, true)) {
