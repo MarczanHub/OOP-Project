@@ -25,14 +25,14 @@ public class Main {
         stockStatus.put("Farba akrylowa \tiloœæ: ", 1500);
 
         while (exit) {
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t* Program modu³owy do zarz¹dzania firm¹ *\n");
-            System.out.println("1. Zaloguj siê \n" + "2. Stwórz konto \n" + "3. WyjdŸ");
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t* Modular program for business management *\n");
+            System.out.println("1. Log in\n" + "2. Create account \n" + "3. Exit");
             String decision = sc.next();
             switch (decision) {
                 case "1" -> login();
                 case "2" -> createAccount();
                 case "3" -> exit();
-                default -> System.out.println("Niepoprawna komenda");
+                default -> System.out.println("Invalid command");
             }
             isLoggedIn();
         }
@@ -40,35 +40,35 @@ public class Main {
 
 
     public static void exit() {
-        System.out.println("Aplikacja zostanie zamkniêta. Zapraszamy ponownie.");
+        System.out.println("The application is going to be shut down. Welcome again.");
         System.exit(0);
     }
 
     private static void logout() {
         isLogged = false;
-        System.out.println("Wylogowano");
+        System.out.println("You're logged out.");
     }
 
     private static void createAccount() {
         boolean passwordIsCorrect = true;
-        System.out.println("Proszê podaæ nazwê u¿ytkownika");
+        System.out.println("Please enter a username");
         String username = sc.next();
         isUserInDB(username);
         String password = "";
         password = checkPassword(passwordIsCorrect, password);
-        System.out.println("U¿ytkownik " + username + " zosta³ dodany do bazy danych");
+        System.out.println("User " + username + " has been added to the database.");
         users.put(username, password);
     }
 
     private static String checkPassword(boolean passwordIsCorrect, String password) {
         while (passwordIsCorrect) {
-            System.out.println("Proszê podaæ has³o");
+            System.out.println("Please enter the password");
             password = sc.next();
-            System.out.println("Proszê powtórzyæ has³o");
+            System.out.println("Please repeat your password.");
             String secondPass = sc.next();
             passwordIsCorrect = !password.equals(secondPass);
             if (passwordIsCorrect) {
-                System.out.println("Podane has³a nie s¹ takie same, spróbuj ponownie");
+                System.out.println("The passwords you provided are not the same, please try again.");
             }
         }
         return password;
@@ -76,15 +76,15 @@ public class Main {
 
     private static void isUserInDB(String username) {
         if (users.containsKey(username)) {
-            System.out.println("U¿ytkownik o podanym loginie ju¿ istnieje w bazie danych");
+            System.out.println("In the database there is already a user with the same login. Choose another nickname.");
             createAccount();
         }
     }
 
     private static void login() {
-        System.out.println("Podaj login");
+        System.out.println("Enter your login");
         String login = sc.next();
-        System.out.println("Podaj has³o");
+        System.out.println("Enter the password");
         String pass = sc.next();
         String passFromUsers = users.get(login);
         findUserInDB(login, pass, passFromUsers);
@@ -92,24 +92,24 @@ public class Main {
 
     private static void findUserInDB(String login, String pass, String passFromUsers) {
         if (pass.equals(passFromUsers)) {
-            System.out.println("Jesteœ zalogowany jako: " + login);
+            System.out.println("You're logged as: " + login);
             isLogged = !isLogged;
         } else {
-            System.out.println("Podany login lub has³o jest niepoprawne");
+            System.out.println("The login or password you entered is incorrect");
         }
     }
 
     private static void isLoggedIn() {
 
         while (isLogged) {
-            System.out.println("\nPanel u¿ytkownika:\n");
-            System.out.println("1. Modu³ ksiêgowy\n" + "2. Modu³ kadrowy\n" + "3. Wyloguj siê");
+            System.out.println("\nUser panel:\n");
+            System.out.println("1. Bookkeeping module\n" + "2. Staff module\n" + "3. Logout");
             String decision = sc.next();
             switch (decision) {
                 case "1" -> bookkeepingModule();
                 case "2" -> staffModule();
                 case "3" -> logout();
-                default -> System.out.println("Niepoprawna komenda");
+                default -> System.out.println("Invalid command");
             }
         }
     }
@@ -117,14 +117,14 @@ public class Main {
     private static void bookkeepingModule() {
 
         while (isLogged) {
-            System.out.println("\n1. Dodaj kontrahentów\n" +
-                    "2. Wystaw fakturê\n" +
-                    "3. Op³aæ fakturê\n" +
-                    "4. Usuñ fakturê\n" +
-                    "5. Edytuj wprowadzon¹ fakturê\n" +
-                    "6. Poka¿ wprowadzone faktury\n" +
-                    "7. Poka¿ podsumowanie miesi¹ca + podatek dochodowy\n" +
-                    "8. Wróæ do panelu u¿ytkownika");
+            System.out.println("\n1. Add Contractors\n" +
+                    "2. Create invoice\n" +
+                    "3. Pay the invoice\n" +
+                    "4. Delete the invoice\n" +
+                    "5. Edit the invoice\n" +
+                    "6. Show invoices\n" +
+                    "7. Show month summary + income tax\n" +
+                    "8. Back to user panel");
             String decision = sc.next();
             switch (decision) {
                 case "1" -> addContractor();
@@ -135,7 +135,7 @@ public class Main {
                 case "6" -> showAllInvoices();
                 case "7" -> showMonthSummary();
                 case "8" -> isLoggedIn();
-                default -> System.out.println("Niepoprawna komenda");
+                default -> System.out.println("Invalid command");
             }
         }
 
@@ -163,10 +163,10 @@ public class Main {
     }
 
     private static void createInvoice() {
-        System.out.println("Wpisz kolejno nastêpuj¹ce dane: ID Faktury, Sposób transakcji (CASH/TRANSFER), Waluta (USD/EUR/PLN), Kwota, ID Kontrahenta");
+        System.out.println("Enter the following information in sequence: Invoice ID, Payment Way (CASH/TRANSFER), Payment Currency (USD/EUR/PLN), Amount, Contractor ID");
         Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong());
 
-        System.out.println("\nW celu zatwierdzenia wpisanych danych wpisz 'confirm' lub wprowadŸ 'back', aby powróciæ do modu³u ksiêgowego.");
+        System.out.println("\nTo confirm your entries type 'confirm' or type 'back', to return to the accounting module.");
         String decision = sc.next();
         if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
@@ -175,17 +175,17 @@ public class Main {
         } else if (decision.equalsIgnoreCase("decline")) {
             bookkeepingModule();
         } else {
-            System.out.println("Niepoprawna komenda, zostajesz przeniesiony do panelu u¿ytkownika.");
+            System.out.println("Invalid command,  you will be taken to the user panel.");
             isLoggedIn();
         }
 
     }
 
     private static void addContractor() {
-        System.out.println("Wpisz kolejno nastêpuj¹ce dane: ID kontrahenta, Nazwê Firmy, NIP");
+        System.out.println("Enter the following information in sequence: Contractor ID, Name, NIP");
         Contractor contractor = new Contractor(sc.nextLong(), sc.next(), sc.next());
 
-        System.out.println("\nW celu zatwierdzenia wpisanych danych wpisz 'confirm' lub wprowadŸ 'back', aby powróciæ do modu³u ksiêgowego.");
+        System.out.println("\nTo confirm your entries type 'confirm' or type 'back', to return to the accounting module.");
         String decision = sc.next();
         if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
@@ -194,7 +194,7 @@ public class Main {
         } else if (decision.equalsIgnoreCase("decline")) {
             bookkeepingModule();
         } else {
-            System.out.println("Niepoprawna komenda, zostajesz przeniesiony do panelu u¿ytkownika.");
+            System.out.println("Invalid command,  you will be taken to the user panel.");
             isLoggedIn();
         }
 
@@ -203,11 +203,11 @@ public class Main {
     private static void staffModule() {
 
         while (isLogged) {
-            System.out.println("\n1. Dodaj pracownika\n" +
-                    "2. Usuñ pracownika\n" +
-                    "3. Edytuj dane istniej¹cego pracownika\n" +
-                    "4. Oblicz pensjê pracownika\n" +
-                    "5. Wróæ do panelu u¿ytkownika");
+            System.out.println("\n1. Add employee\n" +
+                    "2. Delete employee\n" +
+                    "3. Edit employee data\n" +
+                    "4. Calculate employee's salary\n" +
+                    "5. Back to user panel");
             String decision = sc.next();
             switch (decision) {
                 case "1" -> addEmployee();
@@ -215,7 +215,7 @@ public class Main {
                 case "3" -> editEmployeeData();
                 case "4" -> calculateSalary();
                 case "5" -> isLoggedIn();
-                default -> System.out.println("Niepoprawna komenda");
+                default -> System.out.println("Invalid command");
             }
         }
     }
