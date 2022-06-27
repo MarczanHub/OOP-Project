@@ -1,4 +1,5 @@
 import bookkeeping.contractor.Contractor;
+import bookkeeping.contractor.ContractorOperations;
 import bookkeeping.taxes.MonthSummary;
 
 import java.util.HashMap;
@@ -169,6 +170,7 @@ public class Main {
         String decision = sc.next();
         if (decision.equals("confirm")){
             System.out.println();
+            new ContractorOperations().save(contractor);
             contractor.getBio();
         } else if (decision.equals("decline")){
             bookkeepingModule();
