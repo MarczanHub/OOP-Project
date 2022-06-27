@@ -172,8 +172,8 @@ public class Main {
     }
 
     private static void createInvoice() {
-        System.out.println("Enter the following information in sequence: Invoice ID, Payment Way (CASH/TRANSFER), Payment Currency (USD/EUR/PLN), Amount, Contractor ID");
-        Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong());
+        System.out.println("Enter the following information in sequence: Invoice ID, Payment Way (CASH/TRANSFER), Payment Currency (USD/EUR/PLN), Amount, Contractor ID, Is Paid (true/false)");
+        Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong(), sc.nextBoolean());
 
         System.out.println("\nTo confirm your entries type 'confirm' or type 'decline', to return to the accounting module.");
         String decision = sc.next();
