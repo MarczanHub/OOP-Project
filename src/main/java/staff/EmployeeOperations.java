@@ -17,7 +17,7 @@ public class EmployeeOperations implements CrudOperations<Employee> {
     @Override
     public void save(Employee employee) {
         try (FileWriter fileWriter = new FileWriter(EMPLOYEE_CSV, true)) {
-            fileWriter.append(String.format("%s%s%s%s\n", employee.getName(),
+            fileWriter.append(String.format("%s,%s,%s,%s\n", employee.getName(),
                     employee.getSurname(), employee.getPesel(), employee.getSalary()));
         } catch (IOException exception) {
             exception.printStackTrace();

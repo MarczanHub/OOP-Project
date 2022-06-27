@@ -22,7 +22,7 @@ public class InvoicesOperations implements CrudOperations<Invoice> {
             return;
         }
         try (FileWriter fileWriter = new FileWriter(INVOICE_CSV, true)) {
-            fileWriter.append(String.format("%s%s%s%s%s\n", i.getInvoiceId(),
+            fileWriter.append(String.format("%s,%s,%s,%s,%s\n", i.getInvoiceId(),
                     i.getPaymentWay(), i.getCurrency(), i.getAmount(),
                     i.getContractorId()));
         } catch (IOException exception) {
