@@ -175,7 +175,7 @@ public class Main {
         System.out.println("Enter the following information in sequence: Invoice ID, Payment Way (CASH/TRANSFER), Payment Currency (USD/EUR/PLN), Amount, Contractor ID");
         Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong());
 
-        System.out.println("\nTo confirm your entries type 'confirm' or type 'back', to return to the accounting module.");
+        System.out.println("\nTo confirm your entries type 'confirm' or type 'decline', to return to the accounting module.");
         String decision = sc.next();
         if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
@@ -194,7 +194,7 @@ public class Main {
         System.out.println("Enter the following information in sequence: Contractor ID, Name, NIP");
         Contractor contractor = new Contractor(sc.nextLong(), sc.next(), sc.next());
 
-        System.out.println("\nTo confirm your entries type 'confirm' or type 'back', to return to the accounting module.");
+        System.out.println("\nTo confirm your entries type 'confirm' or type 'decline', to return to the accounting module.");
         String decision = sc.next();
         if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
@@ -234,11 +234,16 @@ public class Main {
         sc.nextLine();
         Employee newEmployee = new Employee(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextDouble());
 
-        System.out.println("\nTo confirm your entries type 'confirm' or type 'back', to return to the staff module.");
+        System.out.println("\nTo confirm your entries type 'confirm' or type 'decline', to return to the staff module.");
         String decision = sc.next();
         if (decision.equalsIgnoreCase("confirm")) {
             System.out.println();
-            new EmployeeOperations().save(newEmployee);;
+            new EmployeeOperations().save(newEmployee);
+            System.out.println("Employee{" +
+                    "name = '" + newEmployee.getName() + '\'' +
+                    ", surname = '" + newEmployee.getSurname() + '\'' +
+                    ", pesel = '" + newEmployee.getPesel() + '\'' +
+                    ", salary = " + newEmployee.getSalary() + '}' + "\n");
         } else if (decision.equalsIgnoreCase("decline")) {
             staffModule();
         } else {
