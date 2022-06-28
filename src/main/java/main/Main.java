@@ -1,3 +1,5 @@
+package main;
+
 import bookkeeping.contractor.Contractor;
 import bookkeeping.contractor.ContractorOperations;
 import bookkeeping.invoices.Invoice;
@@ -12,12 +14,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import static main.mainfunctions.Account.*;
+import static main.mainfunctions.Exit.exit;
+import static main.mainfunctions.Exit.logout;
+
+
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
     static boolean exit = true;
     static boolean isLogged = false;
-    static Map<String, String> users = new HashMap<>();
+    public static Map<String, String> users = new HashMap<>();
     static Map<String, Integer> stockStatus = new HashMap<>();
 
     public static void main(String[] args) {
@@ -40,66 +47,6 @@ public class Main {
         }
     }
 
-
-    public static void exit() {
-        System.out.println("The application is going to be shut down. Welcome again.");
-        System.exit(0);
-    }
-
-    private static void logout() {
-        isLogged = false;
-        System.out.println("You're logged out.");
-    }
-
-    private static void createAccount() {
-        boolean passwordIsCorrect = true;
-        System.out.println("Please enter a username");
-        String username = sc.next();
-        isUserInDB(username);
-        String password = "";
-        password = checkPassword(passwordIsCorrect, password);
-        System.out.println("User " + username + " has been added to the database.");
-        users.put(username, password);
-    }
-
-    private static String checkPassword(boolean passwordIsCorrect, String password) {
-        while (passwordIsCorrect) {
-            System.out.println("Please enter the password");
-            password = sc.next();
-            System.out.println("Please repeat your password.");
-            String secondPass = sc.next();
-            passwordIsCorrect = !password.equals(secondPass);
-            if (passwordIsCorrect) {
-                System.out.println("The passwords you provided are not the same, please try again.");
-            }
-        }
-        return password;
-    }
-
-    private static void isUserInDB(String username) {
-        if (users.containsKey(username)) {
-            System.out.println("In the database there is already a user with the same login. Choose another nickname.");
-            createAccount();
-        }
-    }
-
-    private static void login() {
-        System.out.println("Enter your login");
-        String login = sc.next();
-        System.out.println("Enter the password");
-        String pass = sc.next();
-        String passFromUsers = users.get(login);
-        findUserInDB(login, pass, passFromUsers);
-    }
-
-    private static void findUserInDB(String login, String pass, String passFromUsers) {
-        if (pass.equals(passFromUsers)) {
-            System.out.println("You're logged as: " + login);
-            isLogged = !isLogged;
-        } else {
-            System.out.println("The login or password you entered is incorrect");
-        }
-    }
 
     private static void isLoggedIn() {
 
@@ -168,23 +115,26 @@ public class Main {
     }
 
     private static void payInvoice() {
+        Invoice invoice = null;
+        invoice.getInvoiceId();
         boolean isPaid = false;
-        if (!isPaid){
+        if (!invoice.isPaid) {
             System.out.println("Invoice has been already paid");
         } else {
             System.out.println("Type 'pay' to pay the invoice or type 'decline' to go back to the user panel");
             String decision = sc.next();
-            if (decision.equalsIgnoreCase("pay")){
+            if (decision.equalsIgnoreCase("pay")) {
                 System.out.println("The invoice has been paid");
                 isPaid = true;
-            } else if (decision.equalsIgnoreCase("decline")){
+            } else if (decision.equalsIgnoreCase("decline")) {
                 System.out.println("You will be taken to user's panel");
                 isLoggedIn();
             }
         }
     }
 
-    public static void createInvoice() {
+    private static void createInvoice() {
+
         System.out.println("Enter the following information in sequence: Invoice ID, Payment Way (CASH/TRANSFER), Payment Currency (USD/EUR/PLN), Amount, Contractor ID, Is Paid (true/false)");
         Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong(), sc.nextBoolean());
 
