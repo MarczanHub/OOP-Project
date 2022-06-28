@@ -40,14 +40,6 @@ public class Account {
         }
     }
 
-    private static void findUserInDB(String login, String pass, String passFromUsers) {
-        if (pass.equals(passFromUsers)) {
-            System.out.println("You're logged as: " + login);
-            isLogged = !isLogged;
-        } else {
-            System.out.println("The login or password you entered is incorrect");
-        }
-    }
 
     public static void login() {
         System.out.println("Enter your login");
@@ -57,6 +49,5 @@ public class Account {
         String passFromUsers = users.get(login);
         findUserInDB(login, pass, passFromUsers);
     }
-
 
 }

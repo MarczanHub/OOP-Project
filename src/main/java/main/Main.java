@@ -14,9 +14,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import static bookkeeping.taxes.TaxModule.showMonthSummary;
-import static main.mainfunctions.Account.*;
-import static main.mainfunctions.Exit.exit;
-import static main.mainfunctions.Exit.logout;
+import static main.mainfunctions.Account.createAccount;
+import static main.mainfunctions.Account.login;
 
 
 public class Main {
@@ -47,6 +46,24 @@ public class Main {
         }
     }
 
+    public static void logout() {
+        isLogged = false;
+        System.out.println("You're logged out.");
+    }
+
+    public static void findUserInDB(String login, String pass, String passFromUsers) {
+        if (pass.equals(passFromUsers)) {
+            System.out.println("You're logged as: " + login);
+            isLogged = !isLogged;
+        } else {
+            System.out.println("The login or password you entered is incorrect");
+        }
+    }
+
+    public static void exit() {
+        System.out.println("The application is going to be shut down. Welcome again.");
+        System.exit(0);
+    }
 
     private static void isLoggedIn() {
 
