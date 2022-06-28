@@ -1,21 +1,15 @@
 package main;
 
-import bookkeeping.contractor.Contractor;
-import bookkeeping.contractor.ContractorOperations;
-import bookkeeping.invoices.Invoice;
-import bookkeeping.invoices.InvoicesOperations;
-import bookkeeping.invoices.PaymentCurrency;
-import bookkeeping.invoices.PaymentWay;
-import staff.Employee;
-import staff.EmployeeOperations;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import static bookkeeping.contractor.contractormodule.ContractorFunctions.addContractor;
+import static bookkeeping.invoices.modules.InvoiceFunctions.*;
 import static bookkeeping.taxes.TaxModule.showMonthSummary;
 import static main.mainfunctions.Account.createAccount;
 import static main.mainfunctions.Account.login;
+import static staff.staffmodule.StaffFunctions.*;
 
 
 public class Main {
@@ -65,7 +59,7 @@ public class Main {
         System.exit(0);
     }
 
-    private static void isLoggedIn() {
+    public static void isLoggedIn() {
 
         while (isLogged) {
             System.out.println("\nUser panel:\n");
@@ -80,7 +74,7 @@ public class Main {
         }
     }
 
-    private static void bookkeepingModule() {
+    public static void bookkeepingModule() {
 
         while (isLogged) {
             System.out.println("\n1. Add Contractors\n" +
@@ -107,84 +101,7 @@ public class Main {
 
     }
 
-    private static void showAllInvoices() {
-        System.out.println(new InvoicesOperations().findAll());
-        //idk co dalej
-    }
-
-    private static void editInvoice() {
-    }
-
-    private static void deleteInvoice() {
-//        System.out.println("Please enter Invoice ID to delete invoice:");
-//            new InvoicesOperations().deleteById(sc.nextLong());
-//        if (sc.next){
-//            System.out.println("The invoice has been deleted");
-//        } else {
-//            System.out.println("Given invoice ID does not exist");
-//        }
-
-    }
-
-    private static void payInvoice() {
-        Invoice invoice = null;
-        invoice.getInvoiceId();
-        boolean isPaid = false;
-        if (!invoice.isPaid) {
-            System.out.println("Invoice has been already paid");
-        } else {
-            System.out.println("Type 'pay' to pay the invoice or type 'decline' to go back to the user panel");
-            String decision = sc.next();
-            if (decision.equalsIgnoreCase("pay")) {
-                System.out.println("The invoice has been paid");
-                isPaid = true;
-            } else if (decision.equalsIgnoreCase("decline")) {
-                System.out.println("You will be taken to user's panel");
-                isLoggedIn();
-            }
-        }
-    }
-
-    private static void createInvoice() {
-
-        System.out.println("Enter the following information in sequence: Invoice ID, Payment Way (CASH/TRANSFER), Payment Currency (USD/EUR/PLN), Amount, Contractor ID, Is Paid (true/false)");
-        Invoice invoice = new Invoice(sc.nextLong(), PaymentWay.valueOf(sc.next()), PaymentCurrency.valueOf(sc.next()), sc.nextDouble(), sc.nextLong(), sc.nextBoolean());
-
-        System.out.println("\nTo confirm your entries type 'confirm' or type 'decline', to return to the accounting module.");
-        String decision = sc.next();
-        if (decision.equalsIgnoreCase("confirm")) {
-            System.out.println();
-            new InvoicesOperations().save(invoice);
-            invoice.printInvoiceData();
-        } else if (decision.equalsIgnoreCase("decline")) {
-            bookkeepingModule();
-        } else {
-            System.out.println("Invalid command,  you will be taken to the user panel.");
-            isLoggedIn();
-        }
-
-    }
-
-    private static void addContractor() {
-        System.out.println("Enter the following information in sequence: Contractor ID, Name, NIP");
-        Contractor contractor = new Contractor(sc.nextLong(), sc.next(), sc.next());
-
-        System.out.println("\nTo confirm your entries type 'confirm' or type 'decline', to return to the accounting module.");
-        String decision = sc.next();
-        if (decision.equalsIgnoreCase("confirm")) {
-            System.out.println();
-            new ContractorOperations().save(contractor);
-            contractor.getContractorData();
-        } else if (decision.equalsIgnoreCase("decline")) {
-            bookkeepingModule();
-        } else {
-            System.out.println("Invalid command,  you will be taken to the user panel.");
-            isLoggedIn();
-        }
-
-    }
-
-    private static void staffModule() {
+    public static void staffModule() {
 
         while (isLogged) {
             System.out.println("\n1. Add employee\n" +
@@ -204,43 +121,7 @@ public class Main {
         }
     }
 
-    private static void addEmployee() {
-        System.out.println("Enter the following information in sequence: Name, Surname, Pesel, Salary");
-        sc.nextLine();
-        Employee newEmployee = new Employee(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextDouble());
 
-        System.out.println("\nTo confirm your entries type 'confirm' or type 'decline', to return to the staff module.");
-        String decision = sc.next();
-        if (decision.equalsIgnoreCase("confirm")) {
-            System.out.println();
-            new EmployeeOperations().save(newEmployee);
-            System.out.println("Employee{" +
-                    "name = '" + newEmployee.getName() + '\'' +
-                    ", surname = '" + newEmployee.getSurname() + '\'' +
-                    ", pesel = '" + newEmployee.getPesel() + '\'' +
-                    ", salary = " + newEmployee.getSalary() + '}' + "\n");
-        } else if (decision.equalsIgnoreCase("decline")) {
-            staffModule();
-        } else {
-            System.out.println("Invalid command,  you will be taken to the user panel.");
-            isLoggedIn();
-        }
-    }
-
-    private static void deleteEmployee() {
-        System.out.println("Enter employee pesel number");
-        long pesel = sc.nextLong();
-        new EmployeeOperations().deleteById(pesel);
-
-    }
-
-    private static void editEmployeeData() {
-
-    }
-
-    private static void calculateSalary() {
-
-    }
 }
 
 
