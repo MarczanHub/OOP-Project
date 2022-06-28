@@ -6,7 +6,6 @@ import bookkeeping.invoices.Invoice;
 import bookkeeping.invoices.InvoicesOperations;
 import bookkeeping.invoices.PaymentCurrency;
 import bookkeeping.invoices.PaymentWay;
-import bookkeeping.taxes.MonthSummary;
 import staff.Employee;
 import staff.EmployeeOperations;
 
@@ -14,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import static bookkeeping.taxes.TaxModule.showMonthSummary;
 import static main.mainfunctions.Account.*;
 import static main.mainfunctions.Exit.exit;
 import static main.mainfunctions.Exit.logout;
@@ -88,11 +88,6 @@ public class Main {
             }
         }
 
-    }
-
-    private static void showMonthSummary() {
-        MonthSummary summary = new MonthSummary();
-        System.out.println(summary.getTaxToPay());
     }
 
     private static void showAllInvoices() {
